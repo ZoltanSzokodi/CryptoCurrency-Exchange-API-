@@ -1,3 +1,12 @@
+// Dropdown
+$(function() {
+  $.get('/load/', data => {
+    $('#currencyTags').autocomplete({
+      source: data
+    })
+  })
+})
+
 const allRates = document.querySelector('#allRates');
 const requestRates = document.querySelector('#requestRates');
 const currencyTages = document.querySelector('#currencyTags');
