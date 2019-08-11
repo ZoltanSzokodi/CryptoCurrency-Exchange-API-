@@ -33,6 +33,6 @@ function getOneRate() {
   fetch(urlPlus)
   .then(response => response.json())
   .then(data => console.log(data))
-  .catch(err => console.log(JSON.stringify(err))
-  console.log(urlPlus)
+  .catch(err => console.log(JSON.stringify(err)))
+  console.log(urlPlus);
 }
