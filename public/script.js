@@ -11,6 +11,7 @@ const allRates = document.querySelector('#allRates');
 const requestRates = document.querySelector('#requestRates');
 const currencyTages = document.querySelector('#currencyTags');
 const selCurrency = document.querySelector('#selCurrency');
+const output1 = document.querySelector('#output1');
 const url = 'https://api.coinmarketcap.com/v1/ticker/';
 const cur = ["AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PNL", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR"]
 
@@ -53,10 +54,25 @@ function outputToPage(data, c) {
 
 function getOneRate() {
   let curValue = currencyTags.value;
-  let urlPlus = url + curValue;
+  let urlPlus = 'crypto/' + curValue;
   fetch(urlPlus)
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(JSON.stringify(err)))
+    .then(data => outputOneCur(JSON.parse(data)[0]))
+    .catch(err => console.log(JSON.stringify(err)));
   console.log(urlPlus);
 }
+
+function outputOneCur(data) {
+  console.log(data);
+  let html = `<h1>${data.name}</h1>`
+  for (key in data) {
+    let keyContent = key.replace("_", " ");
+    let val = data[key];
+    html += `<div>${keyContent}: ${val}</div>`;
+  }
+  output1.innerHTML = html;
+}
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  }
